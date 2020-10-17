@@ -134,12 +134,28 @@ public class Val {
 
     }
 
-    public static void quicksoft(int []a,int s,int h){
+    /**
+     * 左程云算法课程使用的方法
+     * @return
+     */
+    public static int partition_2(int [] a,int s,int h){
+        int temp =a[h];
+        //less的意思是小于等于区域的右边界
+        int less=s-1;
+        for(int i=s;i<=h;i++){
+            if(a[i]<=temp){
+                swap(a,++less,i);
+            }
+        }
+        return less;
+    }
+
+    public static void quicksort(int []a,int s,int h){
         int i=0;
         if(s<h){
-            i=partition(a,s,h);
-            quicksoft(a,i+1,h);
-            quicksoft(a,s,i-1);
+            i=partition_2(a,s,h);
+            quicksort(a,i+1,h);
+            quicksort(a,s,i-1);
         }
     }
     public static int getN(int[]a,int low,int height,int n){
@@ -176,11 +192,13 @@ public class Val {
                 a[i]=a[k];
                 i=k;
                 k=k*2+1;
-            }else break;
+            }else {
+                break;
+            }
         }
         a[i]=tmp;
     }
-    public static void Heapsort(int [] a){
+    public static void heapsort(int [] a){
         for(int i=a.length/2-1;i>=0;i--){
             sift(a,i,a.length);
         }
@@ -217,13 +235,18 @@ public class Val {
         while (j<=high){
             tmp[k++]=a[j++];
         }
-        for(int c=0;c<tmp.length;c++){
-            a[low++]=tmp[c];
+        for (int value : tmp) {
+            a[low++] = value;
         }
+    }
+    public static void swap(int[] arr,int val1,int val2){
+        int temp=arr[val1];
+        arr[val1]=arr[val2];
+        arr[val2]=temp;
     }
     public static void main(String[] args){
 
        int [] a={3,5,1,4,2,7,5,12,36,6,4,85,4};
-        mergesort(a,0,a.length-1);
+       quicksort(a,0,a.length-1);
     }
 }
