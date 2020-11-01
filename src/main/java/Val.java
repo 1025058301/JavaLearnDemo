@@ -2,9 +2,12 @@ import java.util.Scanner;
 import java.util.Stack;
 
 class TreeNode{
-    int data;
+    int val;
     TreeNode left;
     TreeNode right;
+    public TreeNode(int val){
+        this.val=val;
+    }
 }
 public class Val {
 
@@ -27,7 +30,7 @@ public class Val {
         Stack<TreeNode> stack=new Stack<TreeNode>();
         while(p!=null||!stack.isEmpty()){
             while(p!=null){
-                System.out.println(p.data);
+                System.out.println(p.val);
                 stack.push(p);
                 p=p.left;
             }
